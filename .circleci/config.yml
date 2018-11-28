@@ -1,12 +1,9 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/ruby:2.4.0
+    machine: true
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run:
           name: Build and push Docker image
           command: |
