@@ -5,13 +5,12 @@ jobs:
       - image: circleci/ruby:2.4.0
     steps:
       - checkout
-      - run:
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
           name: Build and push Docker image
           command: |
             TAG=`git rev-parse HEAD`
-            docker build -t https://430047278637.dkr.ecr.us-east-1.amazonaws.com/hello-world:$TAG .
-            docker login -u AWS -p eyJwYXlsb2FkIjoiOHkzMHBjV0pUd1dVUUJwOHc4UWYzVU0wRTBXaXRpc0o4L2sxQnVFWGFCNHF6a2UvbVFyUnNNaE51RWhLRjh4ZmUwK01ZWUhqZURLVzJYVlBacnRLM0t5aSt5UE85UzlIRzNBTnlJRXd2M3dyWTQ1VGJKazVrTjZJWnhvZ2Y5SVNNWXhCRVFjSy91NWFkazY2bEJqZVk4ZFVkd0pLclRYSHRWWVhBRFdKRm84SGE3Y1B6Yytla2ZpU1NZL2dnNng4OWVNWDRTRTh2MEFnbytRZWRRZzRMQWlYUUY4SmNiNldRQllxZkxKMEs1aEc2TlJsRGxHT1ZQRUx2eDFuZk5XUHlaMXRPa2c5OHUyZ2NDM3d4UWc1L1RpTXE1SGFPQzIxL0FadWtaU2NjUTZjR3p1RzE0K0VhWC9YaXV5RTljZE50aEVaN3dMUTlpeFN5U1AxemdueTNjTGVDdjRmSDU4QVNQNkdOOHVVWjQyOEVtNGxob01RSzZzVkNwa0xobXY4M0RIbmhyUlZMcEd1ajJnSTlobm9RbkRqYSs2ZllBNXpRT0pRcE5zdFFUa1dVbTAwNlp1dTM0NDl2eWdqaiswUjFpOFRoOHVHbUlyY1BueElZVkF6VDJnS3pINWNONU4vVjRHZEQ5a3hOT09HN2tEZzhlRnEyeW5HbjRVSUhDdW56R3kvTDZPaFhHdnhmaE9RTUtFc2tiL0ZseS9Ybyt0aUVMNVdwVDQydFM4ajhHbFkybjlmenlXbGNFS0FLSVBFM29UbFBwaitaL3ZUeWlWTHlFWVhhdUVMOHBiV1o0Z3lrOG5ISGc0dWpvVlBLMmJhTDRUWXNqWldlZ3VPdTZzcFBhdkxkSnhKU01sWnpYd0JpckE4Y3NudWN5TFJqMDZVekRmaVdjUi9rdGJLQk5YaXVpN0ZpYTN3SW5LZi9XODBYWWF4U1NFc2tvTlR6eC9ZWUE1NVNpVG5lQTg1VTJkMDgwZXBQYjJkMGQvRWh6S3BwaDU2QlkxSmxwaFdqWmk2L1dLUW9kc2hreTZlcFpqdFBuZEowMXZJNnUvOUxqU3cvNzh2V3BOdWMvVTA2UE5zbzJJaVcxYkdSanlZOTVGUU1TblplSFdROExWNjNuNzdqVEFyZTVsZUdVSCtRc1RZZmZBMnFHbGtEdXdoclV4aG1DU2Q3aDdVaDFiZURHT3J4dXZYWkZqdFR6TjZIMmlpV1VzcFlUQXhzcTQ4ODhGaDAyYjFTZVFJNisrN3BBaU1yUFVKb1UxNk1hYXNVWFJwamdlTHpnakoyek9VSzFscm1UdytYV0Q3Smo4eXVIeU1xUlVaSzRPMlFINTBKSXd5SlQ3QmpEc084S3J3U0FwbTFlK0xPQXJQb1ZUWFR5dG1NNGZSSDVZSjVKTll5akFzSVFwMlFWQmxMcjlwZTAyNVM3RTdQTHNqIiwiZGF0YWtleSI6IkFRRUJBSGh3bTBZYUlTSmVSdEptNW4xRzZ1cWVla1h1b1hYUGU1VUZjZTlScTgvMTR3QUFBSDR3ZkFZSktvWklodmNOQVFjR29HOHdiUUlCQURCb0Jna3Foa2lHOXcwQkJ3RXdIZ1lKWUlaSUFXVURCQUV1TUJFRURHVktrSngwaG9xMmRpSVJQUUlCRUlBN2R5N1dNWDVnZ2Y1WlJKZmlwQTRRcFhLWUJITWF1UTRoT2lMUkZFbGVpdjNDTGFWOTdmdVpEL0M4QXNDWWx1M3YveWg0eFIyd05TMDNSUzg9IiwidmVyc2lvbiI6IjIiLCJ0eXBlIjoiREFUQV9LRVkiLCJleHBpcmF0aW9uIjoxNTQzNDc1MDUwfQ== https://430047278637.dkr.ecr.us-east-1.amazonaws.com
-            docker pushhttps://430047278637.dkr.ecr.us-east-1.amazonaws.com/hello-world:$TAG
+            docker build -t 430047278637.dkr.ecr.us-east-1.amazonaws.com/hello-world:$TAG .
+            eval $(aws ecr get-login --no-include-email --region us-east-1)
+            docker push 430047278637.dkr.ecr.us-east-1.amazonaws.com/hello-world:$TAG
